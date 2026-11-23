@@ -1,0 +1,21 @@
+{
+  "name": "cuidApp - Ecosistema Clínico Integrado",
+  "short_name": "cuidApp",
+  "description": "Plataforma de Registro Clínico Electrónico (DS N° 41), Telemetría ECG IoT y Telecuidado Ley N° 20.584",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050b10",
+  "theme_color": "#0ea5e9",
+  "lang": "es-CL",
+  "categories": ["medical", "health", "productivity"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

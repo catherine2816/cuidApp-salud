@@ -1,0 +1,2381 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import './assets/glasskit/glasskit.css';
+
+/* Normalización y prevención global de desbordamiento horizontal */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Sobrescritura de comportamiento de scroll y fijado para cuidApp */
+body {
+  background-attachment: fixed;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.spin-animation {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+/* Glassmorphism Table Styles & Highlights */
+.table-hover tbody tr:hover td {
+  background-color: rgba(14, 165, 233, 0.15) !important;
+  color: #fff !important;
+  text-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
+}
+.table tbody tr td {
+  background-color: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #ffffffd9 !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.table thead th {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* GlassKit Button Overrides to defeat Bootstrap overrides */
+.btn.btn-glass-primary, .btn-glass-primary {
+  background: rgba(14, 165, 233, 0.45) !important;
+  border: 1px solid rgba(14, 165, 233, 0.6) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.2s ease !important;
+}
+.btn.btn-glass-primary:hover:not(:disabled), .btn-glass-primary:hover:not(:disabled) {
+  background: rgba(14, 165, 233, 0.65) !important;
+  border-color: rgba(14, 165, 233, 0.9) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4) !important;
+}
+
+.btn.btn-glass-danger, .btn-glass-danger {
+  background: rgba(220, 53, 69, 0.45) !important;
+  border: 1px solid rgba(220, 53, 69, 0.6) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.2s ease !important;
+}
+.btn.btn-glass-danger:hover:not(:disabled), .btn-glass-danger:hover:not(:disabled) {
+  background: rgba(220, 53, 69, 0.65) !important;
+  border-color: rgba(220, 53, 69, 0.9) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4) !important;
+}
+
+.btn.btn-glass-secondary, .btn-glass-secondary {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  color: #fff !important;
+  transition: all 0.2s ease !important;
+}
+.btn.btn-glass-secondary:hover, .btn-glass-secondary:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+}
+
+/* Pain Scale Buttons */
+.pain-btn {
+  transition: all 0.2s ease !important;
+  cursor: pointer;
+}
+.pain-btn:hover {
+  z-index: 2 !important;
+}
+
+/* Ocultar flechas nativas de inputs tipo number */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Botones gigantes para la vista de inicio del paciente */
+.patient-giant-btn {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 24px !important;
+  color: #fff !important;
+  min-height: 220px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease !important;
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+}
+
+.patient-giant-btn:hover {
+  transform: translateY(-6px) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35) !important;
+  color: #fff !important;
+}
+
+.patient-giant-btn:active {
+  transform: translateY(-2px) !important;
+}
+
+.patient-giant-btn-danger {
+  background: linear-gradient(135deg, rgba(220, 53, 69, 0.85) 0%, rgba(185, 28, 28, 0.95) 100%) !important;
+  border: 2px solid rgba(255, 120, 130, 0.85) !important;
+  border-radius: 24px !important;
+  color: #fff !important;
+  min-height: 220px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 10px 30px rgba(220, 53, 69, 0.45) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease !important;
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+}
+
+.patient-giant-btn-danger:hover {
+  transform: translateY(-6px) !important;
+  border-color: rgba(255, 160, 170, 0.95) !important;
+  box-shadow: 0 18px 45px rgba(220, 53, 69, 0.65) !important;
+  filter: brightness(1.1);
+  color: #fff !important;
+}
+
+.patient-giant-btn-danger:active {
+  transform: translateY(-2px) !important;
+}
+
+.patient-giant-emoji {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  display: block;
+}
+
+.patient-giant-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Tarjetas de documentos recientes ("carpetitas") */
+.document-folder-card {
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
+  user-select: none;
+}
+
+.document-folder-card:hover {
+  transform: translateY(-5px) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(14, 165, 233, 0.45) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+.document-folder-card:active {
+  transform: translateY(-2px) !important;
+}
+
+/* Ajustes responsivos para posicionar el Login y el logo CuidApp en móvil */
+@media (max-width: 767px) {
+  #login-section {
+    justify-content: flex-start !important;
+    padding-top: 10px !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+  }
+  .zorin-login-container {
+    height: calc(100vh - 30px) !important;
+    min-height: 520px !important;
+    justify-content: space-between !important;
+    padding: 10px 0 !important;
+  }
+}
+
+/* Efecto Visual Impactante para Guardián IoT */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+.heart-pulse-anim,
+.ecg-pulse-anim {
+  display: inline-block;
+  animation: pulse 1s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.animate-pulse {
+  animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes heartbeat-pulse {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.25); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.25); }
+  70% { transform: scale(1); }
+}
+
+.heartbeat-icon {
+  display: inline-block;
+  animation: heartbeat-pulse 1.25s infinite ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes blink-green {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 10px #10b981, 0 0 20px #10b981;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    box-shadow: 0 0 2px #10b981;
+    transform: scale(0.85);
+  }
+}
+
+.blinking-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #10b981;
+  border-radius: 50%;
+  animation: blink-green 1.4s infinite ease-in-out;
+  vertical-align: middle;
+}
+
+.iot-guardian-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.06) 50%, rgba(15, 23, 42, 0.5) 100%) !important;
+  border: 1.5px solid rgba(16, 185, 129, 0.65) !important;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.22), inset 0 0 15px rgba(16, 185, 129, 0.08) !important;
+  border-radius: 18px !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+/* ==========================================================================
+   MODO VISUAL SIMPLE / INCLUSIÓN (LEY N° 20.584 / ACCESIBILIDAD UNIVERSAL)
+   ========================================================================== */
+.cuidapp-simple-mode {
+  font-size: 21px !important;
+  line-height: 1.5 !important;
+}
+
+.cuidapp-simple-mode p,
+.cuidapp-simple-mode span,
+.cuidapp-simple-mode label {
+  font-size: 1.25rem !important;
+}
+
+.cuidapp-simple-mode h1,
+.cuidapp-simple-mode h2,
+.cuidapp-simple-mode h3 {
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+}
+
+.cuidapp-simple-mode .glass-card {
+  background: rgba(15, 23, 42, 0.92) !important;
+  border: 2px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7) !important;
+}
+
+.cuidapp-simple-mode .btn {
+  font-size: 1.35rem !important;
+  padding: 14px 24px !important;
+  border-width: 2px !important;
+}
+
+/* Botones Gigantes de Expresión Facial (Cero-Texto) */
+.simple-mood-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.simple-mood-btn:hover,
+.simple-mood-btn:active {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.simple-mood-btn.mood-good:hover {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #10b981;
+}
+
+.simple-mood-btn.mood-neutral:hover {
+  background: rgba(245, 158, 11, 0.25);
+  border-color: #f59e0b;
+}
+
+.simple-mood-btn.mood-bad:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+}
+
+/* Teclado Telefónico IVR Clásico */
+.ivr-dialpad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.ivr-dialpad-btn {
+  aspect-ratio: 1;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 2px solid rgba(255, 255, 255, 0.25) !important;
+  color: #fff !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.ivr-dialpad-btn:hover {
+  background: rgba(14, 165, 233, 0.3) !important;
+  border-color: #38bdf8 !important;
+  transform: scale(1.08);
+}
+
+.ivr-dialpad-btn:active {
+  background: rgba(14, 165, 233, 0.6) !important;
+  transform: scale(0.95);
+}
+
+.ivr-dialpad-number {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.ivr-dialpad-sub {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+@keyframes phone-ring {
+  0% { transform: rotate(0) scale(1); }
+  10% { transform: rotate(-15deg) scale(1.15); }
+  20% { transform: rotate(15deg) scale(1.15); }
+  30% { transform: rotate(-15deg) scale(1.15); }
+  40% { transform: rotate(15deg) scale(1.15); }
+  50% { transform: rotate(0) scale(1); }
+  100% { transform: rotate(0) scale(1); }
+}
+
+.phone-ringing-icon {
+  display: inline-block;
+  animation: phone-ring 1.4s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   ESTILOS DE IMPRESIÓN Y REPORTE PDF (DS N° 41 MINSAL)
+   ========================================================================== */
+@media print {
+  @page {
+    size: landscape A4;
+    margin: 12mm 15mm 15mm 15mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Ocultar elementos de navegación, menús laterales, botones y cabecera de la app */
+  #sidebar,
+  .sidebar,
+  #appSidebar,
+  #appHeader,
+  .navbar,
+  nav,
+  .btn,
+  button,
+  .no-print,
+  .nav-pills,
+  .input-group,
+  #auditSearchInput,
+  #auditRoleSelect,
+  #auditTypeSelect,
+  #btnExportAuditJson,
+  #btnPrintAuditReport,
+  .modal,
+  .modal-backdrop,
+  footer {
+    display: none !important;
+  }
+
+  /* Hacer visibles los contenedores de tabla sin fondos oscuros */
+  #adminWorkspaceArea,
+  .card,
+  .glass-card,
+  .table-responsive,
+  .table {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    color: #0f172a !important;
+  }
+
+  .table th {
+    background-color: #0f172a !important;
+    color: #ffffff !important;
+    border: 1px solid #0f172a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .table td {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  .table-hover tbody tr:hover td {
+    background-color: transparent !important;
+    color: #0f172a !important;
+    text-shadow: none !important;
+  }
+}
+
+/* ==========================================================================
+   CuidApp - Estilos Vibrantes y Dark GlassKit para Módulo Pediátrico
+   Acentos: Fucsia (#ec4899), Rojo Coral (#ef4444), Turquesa (#06b6d4)
+   Fondos: Dark GlassKit (#08101a / #0f1926)
+   ========================================================================== */
+
+.pediatric-dark-container {
+  background: radial-gradient(circle at 15% 15%, rgba(236, 72, 153, 0.08) 0%, transparent 40%),
+              radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+              linear-gradient(145deg, #08101a 0%, #0f1926 100%) !important;
+  color: #f8fafc !important;
+  border-radius: 1.25rem;
+}
+
+.pediatric-card-fuchsia {
+  background: rgba(15, 25, 38, 0.85) !important;
+  border: 1px solid rgba(236, 72, 153, 0.35) !important;
+  box-shadow: 0 8px 32px 0 rgba(236, 72, 153, 0.15) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-radius: 1rem;
+}
+
+.pediatric-card-coral {
+  background: rgba(15, 25, 38, 0.85) !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+  box-shadow: 0 8px 32px 0 rgba(239, 68, 68, 0.15) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-radius: 1rem;
+}
+
+.pediatric-card-turquoise {
+  background: rgba(15, 25, 38, 0.85) !important;
+  border: 1px solid rgba(6, 182, 212, 0.35) !important;
+  box-shadow: 0 8px 32px 0 rgba(6, 182, 212, 0.15) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-radius: 1rem;
+}
+
+.text-pediatric-fuchsia {
+  color: #ec4899 !important;
+}
+
+.text-pediatric-coral {
+  color: #ef4444 !important;
+}
+
+.text-pediatric-turquoise {
+  color: #06b6d4 !important;
+}
+
+.badge-pediatric-fuchsia {
+  background: rgba(236, 72, 153, 0.2) !important;
+  color: #f472b6 !important;
+  border: 1px solid rgba(236, 72, 153, 0.4) !important;
+}
+
+.badge-pediatric-coral {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #f87171 !important;
+  border: 1px solid rgba(239, 68, 68, 0.4) !important;
+}
+
+.badge-pediatric-turquoise {
+  background: rgba(6, 182, 212, 0.2) !important;
+  color: #22d3ee !important;
+  border: 1px solid rgba(6, 182, 212, 0.4) !important;
+}
+
+/* ==========================================================================
+   MODO FÁCIL ADULTO MAYOR (EDAD >= 60 AÑOS) - ACCESIBILIDAD UNIVERSAL LEY 20.584
+   Tipografía grande (text-lg/text-xl), alto contraste y botones altos (min-h-[56px])
+   ========================================================================== */
+
+/* Modo Adulto Mayor: Escalado forzado desactivado para mantener diseño limpio y proporciones idénticas a Sofía y Valentina */
+body.cuidapp-senior-mode {
+  /* Tamaño base estándar heredado */
+}
+
+/* Textos estándar sin sobredimensionar */
+body.cuidapp-senior-mode h1 { font-size: 1.75rem !important; }
+body.cuidapp-senior-mode h2 { font-size: 1.5rem !important; }
+body.cuidapp-senior-mode h3 { font-size: 1.35rem !important; }
+body.cuidapp-senior-mode h4 { font-size: 1.2rem !important; }
+body.cuidapp-senior-mode h5 { font-size: 1.1rem !important; }
+body.cuidapp-senior-mode h6 { font-size: 1rem !important; }
+body.cuidapp-senior-mode p,
+body.cuidapp-senior-mode .fs-7,
+body.cuidapp-senior-mode .fs-8,
+body.cuidapp-senior-mode small {
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+}
+body.cuidapp-senior-mode .text-white-50 {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Alto contraste en tarjetas y paneles con proporciones limpias */
+body.cuidapp-senior-mode .glass-card {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Botones estándar con proporciones equilibradas */
+body.cuidapp-senior-mode .btn,
+body.cuidapp-senior-mode #caregiverTabNav button,
+body.cuidapp-senior-mode #caregiverEmergencyButtonsContainer a,
+body.cuidapp-senior-mode #caregiverEmergencyButtonsContainer button,
+body.cuidapp-senior-mode .btn-glass-primary,
+body.cuidapp-senior-mode .btn-glass-secondary,
+body.cuidapp-senior-mode button[type="submit"] {
+  min-height: 44px !important;
+  font-size: 0.95rem !important;
+  padding: 10px 18px !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+body.cuidapp-senior-mode .form-control,
+body.cuidapp-senior-mode .form-select {
+  min-height: 42px !important;
+  font-size: 0.95rem !important;
+  background: rgba(4, 10, 24, 0.9) !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.4) !important;
+  color: #ffffff !important;
+  border-radius: 10px !important;
+}
+
+body.cuidapp-senior-mode .badge {
+  font-size: 0.95rem !important;
+  padding: 6px 14px !important;
+}
+
+/* Emojis grandes y destacados (💊, ❤️, 📄, 🦷, 🚨) */
+body.cuidapp-senior-mode .emoji-senior {
+  font-size: 1.7rem !important;
+  line-height: 1 !important;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Alineación estricta en Presión Arterial: botones -, input numérico y botón + en una sola fila horizontal */
+.input-group.flex-nowrap,
+body.cuidapp-senior-mode .input-group.flex-nowrap,
+body.cuidapp-senior-mode .input-group {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+}
+
+body.cuidapp-senior-mode .input-group .input-btn,
+body.cuidapp-senior-mode .input-group .decrease-btn,
+body.cuidapp-senior-mode .input-group .increase-btn,
+.input-group.flex-nowrap .input-btn {
+  min-height: 52px !important;
+  height: 52px !important;
+  min-width: 50px !important;
+  width: 50px !important;
+  flex: 0 0 50px !important;
+  flex-shrink: 0 !important;
+  font-size: 1.6rem !important;
+  font-weight: 800 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+}
+
+.input-group.flex-nowrap input,
+.input-group.flex-nowrap .form-control,
+body.cuidapp-senior-mode .input-group input.vital-calc-input,
+body.cuidapp-senior-mode .input-group #bpSystolic,
+body.cuidapp-senior-mode .input-group #bpDiastolic,
+body.cuidapp-senior-mode .input-group #vitalSpO2,
+body.cuidapp-senior-mode .input-group #vitalTemperature,
+body.cuidapp-senior-mode .input-group #glucoseLevel,
+body.cuidapp-senior-mode .input-group #heartRate {
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  min-height: 40px !important;
+  height: 40px !important;
+  text-align: center !important;
+  min-width: 36px !important;
+  max-width: 100% !important;
+  flex: 1 1 auto !important;
+  padding-left: 3px !important;
+  padding-right: 3px !important;
+  box-sizing: border-box !important;
+}
+
+#bpSystolic,
+#bpDiastolic,
+.input-group #bpSystolic,
+.input-group #bpDiastolic,
+body.cuidapp-senior-mode #bpSystolic,
+body.cuidapp-senior-mode #bpDiastolic {
+  min-width: 36px !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Botón Escuchar Pantalla integrado en la barra lateral izquierda (justo encima de Usuario) */
+.btn-floating-senior-speech,
+.btn-sidebar-senior-speech {
+  position: static !important;
+  width: 100% !important;
+  min-height: 44px !important;
+  padding: 8px 12px !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #fef08a !important;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin-bottom: 8px !important;
+}
+.btn-floating-senior-speech:hover,
+.btn-sidebar-senior-speech:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6) !important;
+  color: #ffffff !important;
+}
+.btn-floating-senior-speech.speaking,
+.btn-sidebar-senior-speech.speaking {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  border-color: #fca5a5 !important;
+  animation: pulse-speech 1.2s infinite alternate !important;
+}
+
+body.cuidapp-theme-light .btn-floating-senior-speech,
+body.cuidapp-theme-light .btn-sidebar-senior-speech {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #fbbf24 !important;
+}
+
+@keyframes pulse-speech {
+  from { box-shadow: 0 0 15px rgba(239, 68, 68, 0.5); }
+  to { box-shadow: 0 0 35px rgba(239, 68, 68, 0.9), 0 0 10px #fff; }
+}
+
+/* Margen inferior para resguardo de scroll con botón flotante (pb-24) */
+.pb-24 {
+  padding-bottom: 6rem !important; /* 96px de resguardo inferior */
+}
+
+#dashboard-content-area {
+  padding-bottom: 6rem !important;
+}
+
+/* ==========================================================================
+   MODO CLARO DE ALTO CONTRASTE (SOL / DÍA) - Óptimo para luz del día y tercera edad
+   ========================================================================== */
+body.cuidapp-theme-light,
+body.cuidapp-theme-light.cuidapp-senior-mode {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+body.cuidapp-theme-light #ambient-orb {
+  opacity: 0.12 !important;
+  filter: blur(120px) !important;
+}
+
+body.cuidapp-theme-light .sidebar {
+  background: #ffffff !important;
+  border-right: 2px solid #cbd5e1 !important;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.06) !important;
+}
+
+body.cuidapp-theme-light .sidebar header h4,
+body.cuidapp-theme-light .sidebar header i,
+body.cuidapp-theme-light .sidebar-text-full,
+body.cuidapp-theme-light .sidebar footer strong {
+  color: #0f172a !important;
+}
+
+body.cuidapp-theme-light .sidebar .nav-link {
+  color: #334155 !important;
+}
+
+body.cuidapp-theme-light .sidebar .nav-link.active {
+  background: rgba(2, 132, 199, 0.15) !important;
+  color: #0284c7 !important;
+  border-left: 4px solid #0284c7 !important;
+  font-weight: 700 !important;
+}
+
+body.cuidapp-theme-light .glass-card,
+body.cuidapp-theme-light.cuidapp-senior-mode .glass-card,
+body.cuidapp-theme-light .card,
+body.cuidapp-theme-light.cuidapp-senior-mode .card {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08) !important;
+}
+
+body.cuidapp-theme-light h1,
+body.cuidapp-theme-light h2,
+body.cuidapp-theme-light h3,
+body.cuidapp-theme-light h4,
+body.cuidapp-theme-light h5,
+body.cuidapp-theme-light h6,
+body.cuidapp-theme-light .glass-title,
+body.cuidapp-theme-light .card-header,
+body.cuidapp-theme-light .sidebar header h4,
+body.cuidapp-theme-light .modal-title {
+  color: #1e3a8a !important; /* Azul índigo profundo (#1e3a8a) para encabezados */
+  font-weight: 700 !important;
+}
+
+body.cuidapp-theme-light p,
+body.cuidapp-theme-light small,
+body.cuidapp-theme-light .text-white-50,
+body.cuidapp-theme-light.cuidapp-senior-mode .text-white-50,
+body.cuidapp-theme-light .glass-label {
+  color: #334155 !important;
+}
+
+body.cuidapp-theme-light strong,
+body.cuidapp-theme-light b {
+  color: #0f172a !important;
+}
+
+/* Forzar alto contraste en textos que tenían color blanco forzado (#0f172a / #334155) */
+body.cuidapp-theme-light .text-white,
+body.cuidapp-theme-light.cuidapp-senior-mode .text-white {
+  color: #0f172a !important;
+}
+
+body.cuidapp-theme-light .text-light,
+body.cuidapp-theme-light.cuidapp-senior-mode .text-light {
+  color: #1e293b !important;
+}
+
+body.cuidapp-theme-light .form-control,
+body.cuidapp-theme-light.cuidapp-senior-mode .form-control,
+body.cuidapp-theme-light .form-select,
+body.cuidapp-theme-light.cuidapp-senior-mode .form-select {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border: 1.5px solid #94a3b8 !important;
+}
+
+body.cuidapp-theme-light .form-control:focus,
+body.cuidapp-theme-light .form-select:focus {
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.25) !important;
+  background: #ffffff !important;
+}
+
+body.cuidapp-theme-light .btn-glass-secondary {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+}
+
+body.cuidapp-theme-light .btn-glass-secondary:hover {
+  background: #e2e8f0 !important;
+}
+
+body.cuidapp-theme-light .bg-dark,
+body.cuidapp-theme-light .bg-dark-subtle {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+body.cuidapp-theme-light .border-secondary-subtle,
+body.cuidapp-theme-light .border-light,
+body.cuidapp-theme-light .border-white {
+  border-color: #cbd5e1 !important;
+}
+
+body.cuidapp-theme-light #cuidapp-global-topbar {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06) !important;
+}
+
+body.cuidapp-theme-light #iotEcgContainerCuidador {
+  background: #0b1329 !important;
+  border-radius: 16px;
+  padding: 8px;
+}
+
+/* ==========================================================================
+   ALTO CONTRASTE ESPECÍFICO EN CITAS, EXÁMENES, HORAS Y REMEDIOS EN MODO DÍA
+   ========================================================================== */
+/* Cajas de citas y exámenes */
+body.cuidapp-theme-light #cardPatientAppointments .rounded-3,
+body.cuidapp-theme-light #cardPatientAppointments .rounded-2,
+body.cuidapp-theme-light #caregiverPrescriptionListPreview .rounded-3 {
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+/* Títulos de citas y exámenes */
+body.cuidapp-theme-light #cardPatientAppointments .appointment-title,
+body.cuidapp-theme-light #cardPatientAppointments h5,
+body.cuidapp-theme-light #cardPatientAppointments h6,
+body.cuidapp-theme-light #cardPatientAppointments strong {
+  color: #0f172a !important;
+}
+
+/* Horas de citas (09:30 hrs, 08:00 hrs) y badges de tiempo */
+body.cuidapp-theme-light .appointment-time-badge,
+body.cuidapp-theme-light .badge-time,
+body.cuidapp-theme-light #cardPatientAppointments .badge[style*="rgba(255,255,255"],
+body.cuidapp-theme-light #cardPatientAppointments .badge[style*="rgba(255, 255, 255"],
+body.cuidapp-theme-light #cardPatientAppointments .badge[style*="color: #fff"],
+body.cuidapp-theme-light #cardPatientAppointments .badge[style*="color:#fff"] {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+/* Subtítulos y descripciones dentro de citas y exámenes */
+body.cuidapp-theme-light #cardPatientAppointments .small,
+body.cuidapp-theme-light #cardPatientAppointments .small div,
+body.cuidapp-theme-light #cardPatientAppointments .text-white-50 {
+  color: #334155 !important;
+}
+
+/* Remedios y prescripciones en Modo Día */
+body.cuidapp-theme-light #caregiverPrescriptionListPreview .text-white,
+body.cuidapp-theme-light #caregiverPrescriptionListPreview strong:not(.text-info) {
+  color: #0f172a !important;
+}
+
+body.cuidapp-theme-light #caregiverPrescriptionListPreview .text-white-50 {
+  color: #334155 !important;
+}
+
+/* Ficha del paciente lateral (columna derecha) en Modo Día */
+body.cuidapp-theme-light #caregiverPatientSidebar .text-white,
+body.cuidapp-theme-light #caregiverPatientSidebar strong,
+body.cuidapp-theme-light #pMetaContact {
+  color: #0f172a !important;
+}
+
+body.cuidapp-theme-light #caregiverPatientSidebar .text-white-50 {
+  color: #334155 !important;
+}
+
+body.cuidapp-theme-light #caregiverPatientSidebar .btn-glass-secondary {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+}
+
+/* Botones de acción outline en Modo Día */
+body.cuidapp-theme-light .btn-outline-warning {
+  color: #b45309 !important;
+  border-color: #d97706 !important;
+}
+
+body.cuidapp-theme-light .btn-outline-warning:hover {
+  background: #f59e0b !important;
+  color: #ffffff !important;
+}
+
+body.cuidapp-theme-light .btn-outline-info {
+  color: #0369a1 !important;
+  border-color: #0284c7 !important;
+}
+
+body.cuidapp-theme-light .btn-outline-info:hover {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   LOGIN EN MODO CLARO (#f0f9ff → #e0f2fe con destellos cian/menta y alto contraste)
+   ========================================================================== */
+body.cuidapp-theme-light #login-section {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 45%, #ecfeff 75%, #f0fdf4 100%) !important;
+  color: #0f172a !important;
+}
+
+body.cuidapp-theme-light #login-section #ambient-orb {
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, rgba(16, 185, 129, 0.16) 50%, transparent 70%) !important;
+  opacity: 0.55 !important;
+  filter: blur(80px) !important;
+}
+
+body.cuidapp-theme-light .zorin-credentials-widget {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  border: 1.5px solid #0284c7 !important;
+  box-shadow: 0 12px 35px rgba(2, 132, 199, 0.15) !important;
+  color: #0f172a !important;
+}
+
+body.cuidapp-theme-light .zorin-credentials-widget span,
+body.cuidapp-theme-light .zorin-credentials-widget strong,
+body.cuidapp-theme-light .zorin-credentials-widget .fw-bold {
+  color: #0f172a !important;
+}
+
+body.cuidapp-theme-light .zorin-credentials-widget .btn-quick-login {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
+}
+
+body.cuidapp-theme-light .zorin-credentials-widget .btn-quick-login:hover {
+  background: #e0f2fe !important;
+  border-color: #0284c7 !important;
+  transform: translateY(-1px);
+}
+
+body.cuidapp-theme-light .zorin-credentials-widget .btn-quick-login code {
+  color: #0284c7 !important;
+  font-weight: 700 !important;
+}
+
+body.cuidapp-theme-light #zorinClock {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1.5px solid #bae6fd !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.12) !important;
+  padding: 6px 22px !important;
+  border-radius: 999px !important;
+}
+
+body.cuidapp-theme-light .zorin-theme-widget #loginThemeToggleBtn {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 2px solid #0284c7 !important;
+  box-shadow: 0 4px 18px rgba(2, 132, 199, 0.2) !important;
+  font-weight: 700 !important;
+}
+
+body.cuidapp-theme-light .zorin-theme-widget #loginThemeToggleBtn:hover {
+  background: #f0f9ff !important;
+  border-color: #0369a1 !important;
+  transform: translateY(-1px);
+}
+
+body.cuidapp-theme-light #zorinGreeting {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+body.cuidapp-theme-light .zorin-avatar {
+  background: #ffffff !important;
+  border: 2.5px solid #0284c7 !important;
+  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.2) !important;
+}
+
+body.cuidapp-theme-light #zorinAvatarIcon {
+  color: #0284c7 !important;
+  opacity: 0.9 !important;
+}
+
+body.cuidapp-theme-light .zorin-input {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 2px solid #94a3b8 !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06) !important;
+  font-weight: 600 !important;
+}
+
+body.cuidapp-theme-light .zorin-input::placeholder {
+  color: #64748b !important;
+}
+
+body.cuidapp-theme-light .zorin-input:focus {
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.25) !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+body.cuidapp-theme-light .zorin-forward-btn,
+body.cuidapp-theme-light .zorin-back-btn {
+  background: linear-gradient(135deg, #0284c7 0%, #00b4d8 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #0284c7 !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35) !important;
+}
+
+body.cuidapp-theme-light .zorin-forward-btn:hover,
+body.cuidapp-theme-light .zorin-back-btn:hover {
+  background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%) !important;
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.5) !important;
+  transform: scale(1.08) !important;
+}
+
+body.cuidapp-theme-light #btnOpenRegisterModal {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+  color: #ffffff !important;
+  border: 2px solid #38bdf8 !important;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35) !important;
+}
+
+body.cuidapp-theme-light #btnOpenRegisterModal * {
+  color: #ffffff !important;
+}
+
+body.cuidapp-theme-light #btnOpenRecoveryModal {
+  color: #0369a1 !important;
+  font-weight: 700 !important;
+}
+
+body.cuidapp-theme-light .zorin-bottom-bar {
+  color: #0f172a !important;
+}
+
+body.cuidapp-theme-light .zorin-bottom-bar .zorin-logo {
+  color: #0f172a !important;
+}
+
+body.cuidapp-theme-light .zorin-bottom-bar i.bi-heart-pulse-fill {
+  color: #0284c7 !important;
+}
+
+body.cuidapp-theme-light #settingsBtn {
+  color: #475569 !important;
+}
+
+/* ==========================================================================
+   PALETA VIBRANTE DE ALTO CONTRASTE CON ACENTOS FLÚOR CLÍNICOS (MODO DÍA)
+   ========================================================================== */
+
+/* 1. TARJETAS DE RESUMEN Y CONTENEDORES CLÍNICOS SIMILARES (#ffffff luminoso, bordes 2px solid) */
+body.cuidapp-theme-light .card-summary-metric,
+body.cuidapp-theme-light .card-summary-vaccines,
+body.cuidapp-theme-light .card-summary-dental,
+body.cuidapp-theme-light .card-summary-preventive,
+body.cuidapp-theme-light .card-summary-prenatal,
+body.cuidapp-theme-light .card-summary-dental-box,
+body.cuidapp-theme-light .card-summary-preventive-box,
+body.cuidapp-theme-light #caregiverVaccinesDentalContainer .rounded-3,
+body.cuidapp-theme-light #cardPrenatalCaregiverVaccines .rounded-3,
+body.cuidapp-theme-light #cardPrenatalCaregiverDaily .rounded-3,
+body.cuidapp-theme-light #containerAddVaccineForm {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08) !important;
+  border-radius: 14px !important;
+}
+
+/* Tarjeta Resumen: Esquema Vacunal (PNI) - Borde Verde Flúor 2px solid */
+body.cuidapp-theme-light .card-summary-vaccines {
+  background: #ffffff !important;
+  border: 2px solid #00e676 !important;
+  box-shadow: 0 6px 22px rgba(0, 230, 118, 0.22) !important;
+}
+
+/* Tarjeta Resumen: Salud Odontológica - Borde Cian Eléctrico 2px solid */
+body.cuidapp-theme-light .card-summary-dental {
+  background: #ffffff !important;
+  border: 2px solid #00e5ff !important;
+  box-shadow: 0 6px 22px rgba(0, 229, 255, 0.22) !important;
+}
+
+/* Tarjeta Resumen: Controles Preventivos MINSAL - Borde Magenta / Coral 2px solid */
+body.cuidapp-theme-light .card-summary-preventive {
+  background: #ffffff !important;
+  border: 2px solid #ff2e93 !important;
+  box-shadow: 0 6px 22px rgba(255, 46, 147, 0.20) !important;
+}
+
+/* Cajas de Control Prenatal & Ficha Odontológica */
+body.cuidapp-theme-light .card-summary-prenatal-weeks {
+  background: #ffffff !important;
+  border: 2px solid #00e5ff !important;
+  box-shadow: 0 4px 16px rgba(0, 229, 255, 0.16) !important;
+}
+body.cuidapp-theme-light .card-summary-prenatal-fetal {
+  background: #ffffff !important;
+  border: 2px solid #00e676 !important;
+  box-shadow: 0 4px 16px rgba(0, 230, 118, 0.16) !important;
+}
+body.cuidapp-theme-light .card-summary-prenatal-immuno {
+  background: #ffffff !important;
+  border: 2px solid #ff2e93 !important;
+  box-shadow: 0 4px 16px rgba(255, 46, 147, 0.16) !important;
+}
+body.cuidapp-theme-light .card-summary-prenatal-eco {
+  background: #ffffff !important;
+  border: 2px solid #f97316 !important;
+  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.16) !important;
+}
+body.cuidapp-theme-light .card-summary-dental-control {
+  background: #ffffff !important;
+  border: 2px solid #00e5ff !important;
+  box-shadow: 0 4px 16px rgba(0, 229, 255, 0.15) !important;
+}
+body.cuidapp-theme-light .card-summary-dental-balance {
+  background: #ffffff !important;
+  border: 2px solid #00e676 !important;
+  box-shadow: 0 4px 16px rgba(0, 230, 118, 0.15) !important;
+}
+body.cuidapp-theme-light .card-summary-dental-notes {
+  background: #ffffff !important;
+  border: 2px solid #f97316 !important;
+  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.15) !important;
+}
+body.cuidapp-theme-light .card-summary-preventive-box {
+  background: #ffffff !important;
+  border: 2px solid #cbd5e1 !important;
+  border-left: 5px solid #00e5ff !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.07) !important;
+}
+
+/* Texto principal negro azulado (#0f172a) dentro de todas las tarjetas */
+body.cuidapp-theme-light .card-summary-metric h3,
+body.cuidapp-theme-light .card-summary-metric h4,
+body.cuidapp-theme-light .card-summary-metric h5,
+body.cuidapp-theme-light .card-summary-metric strong,
+body.cuidapp-theme-light .card-summary-metric b,
+body.cuidapp-theme-light .card-summary-dental-box h4,
+body.cuidapp-theme-light .card-summary-dental-box h5,
+body.cuidapp-theme-light .card-summary-dental-box strong,
+body.cuidapp-theme-light .card-summary-preventive-box h6,
+body.cuidapp-theme-light .card-summary-preventive-box strong,
+body.cuidapp-theme-light .card-summary-prenatal h4,
+body.cuidapp-theme-light .card-summary-prenatal h5,
+body.cuidapp-theme-light .card-summary-prenatal strong,
+body.cuidapp-theme-light #caregiverVaccinesDentalContainer .text-white {
+  color: #0f172a !important;
+}
+
+/* Texto secundario de alta legibilidad (#334155) */
+body.cuidapp-theme-light .card-summary-metric .text-white-50,
+body.cuidapp-theme-light .card-summary-dental-box .text-white-50,
+body.cuidapp-theme-light .card-summary-preventive-box .text-white-50,
+body.cuidapp-theme-light .card-summary-prenatal .text-white-50,
+body.cuidapp-theme-light #caregiverVaccinesDentalContainer .text-white-50 {
+  color: #334155 !important;
+}
+
+/* Sub-cajas internas de diagnóstico, notas o datos con fondo contrastado */
+body.cuidapp-theme-light #caregiverVaccinesDentalContainer .bg-dark,
+body.cuidapp-theme-light #caregiverVaccinesDentalContainer .bg-dark-subtle {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+/* 2. BARRAS E INDICADORES FLÚOR CLÍNICOS */
+/* Pista de progreso clara */
+body.cuidapp-theme-light .progress {
+  background: #e2e8f0 !important;
+  border-radius: 999px !important;
+  height: 8px !important;
+}
+
+/* Barra en Verde Flúor (#00e676 / #10b981) */
+body.cuidapp-theme-light .progress-bar.bg-success,
+body.cuidapp-theme-light .card-summary-vaccines .progress-bar {
+  background: linear-gradient(90deg, #10b981 0%, #00e676 100%) !important;
+  box-shadow: 0 0 10px rgba(0, 230, 118, 0.7) !important;
+}
+
+/* Barra en Cian Eléctrico (#00e5ff / #0284c7) */
+body.cuidapp-theme-light .progress-bar.bg-info,
+body.cuidapp-theme-light .card-summary-dental .progress-bar {
+  background: linear-gradient(90deg, #0284c7 0%, #00e5ff 100%) !important;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.7) !important;
+}
+
+/* Barra en Magenta / Coral Vibrante (#ff2e93 / #f97316) */
+body.cuidapp-theme-light .progress-bar.bg-warning,
+body.cuidapp-theme-light .card-summary-preventive .progress-bar {
+  background: linear-gradient(90deg, #ff2e93 0%, #f97316 100%) !important;
+  box-shadow: 0 0 10px rgba(255, 46, 147, 0.7) !important;
+}
+
+/* Indicadores y Badges Clínicos Flúor */
+body.cuidapp-theme-light .badge.bg-success-subtle {
+  background: rgba(0, 230, 118, 0.16) !important;
+  color: #047857 !important;
+  border: 1.5px solid #00e676 !important;
+  font-weight: 700 !important;
+}
+
+body.cuidapp-theme-light .badge.bg-info-subtle {
+  background: rgba(0, 229, 255, 0.16) !important;
+  color: #0284c7 !important;
+  border: 1.5px solid #00e5ff !important;
+  font-weight: 700 !important;
+}
+
+body.cuidapp-theme-light .badge.bg-warning-subtle {
+  background: rgba(249, 115, 22, 0.16) !important;
+  color: #c2410c !important;
+  border: 1.5px solid #f97316 !important;
+  font-weight: 700 !important;
+}
+
+body.cuidapp-theme-light .badge.bg-pink-subtle {
+  background: rgba(255, 46, 147, 0.16) !important;
+  color: #be185d !important;
+  border: 1.5px solid #ff2e93 !important;
+  font-weight: 700 !important;
+}
+
+/* 3. BOTONES ACTIVOS Y PESTAÑAS SELECCIONADAS */
+/* ==========================================================================
+   DASHBOARD EN MODO CLARO: BOTONES SÓLIDOS VIBRANTES Y BADGES DE ALTO CONTRASTE
+   (Elimina celestes pálidos / pasteles lavados)
+   ========================================================================== */
+
+/* 1. Botones Primarios y de Acción (Guardar Reporte, + Agendar Recordatorio, Abrir Ficha, etc.):
+      Cian Eléctrico Intenso (#0284c7 / #00b4d8) con texto blanco sólido */
+body.cuidapp-theme-light .btn-glass-primary:not(.active),
+body.cuidapp-theme-light #submitButtonContainer button,
+body.cuidapp-theme-light #btnToggleAddAppointmentForm,
+body.cuidapp-theme-light #btnOpenDentalModalFromCaregiver,
+body.cuidapp-theme-light #btnOpenDentalOdontogram,
+body.cuidapp-theme-light #linkPatientClinical.active,
+body.cuidapp-theme-light .btn-primary {
+  background: linear-gradient(135deg, #0284c7 0%, #00b4d8 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #0284c7 !important;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+body.cuidapp-theme-light .btn-glass-primary:not(.active) *,
+body.cuidapp-theme-light #submitButtonContainer button *,
+body.cuidapp-theme-light #btnToggleAddAppointmentForm *,
+body.cuidapp-theme-light #btnOpenDentalModalFromCaregiver *,
+body.cuidapp-theme-light #btnOpenDentalOdontogram *,
+body.cuidapp-theme-light #linkPatientClinical.active *,
+body.cuidapp-theme-light .btn-primary * {
+  color: #ffffff !important;
+}
+
+body.cuidapp-theme-light .btn-glass-primary:not(.active):hover,
+body.cuidapp-theme-light #submitButtonContainer button:hover,
+body.cuidapp-theme-light #btnToggleAddAppointmentForm:hover,
+body.cuidapp-theme-light #btnOpenDentalModalFromCaregiver:hover,
+body.cuidapp-theme-light #btnOpenDentalOdontogram:hover,
+body.cuidapp-theme-light .btn-primary:hover {
+  background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%) !important;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 2. Botones de Urgencia y Emergencia (SAMU 131 / Alerta Crítica): Coral / Rojo Vivo (#e11d48) */
+body.cuidapp-theme-light .btn-danger,
+body.cuidapp-theme-light .btn-glass-danger,
+body.cuidapp-theme-light #btnCaregiverEmergencySamu,
+body.cuidapp-theme-light #btnEmergencySamu,
+body.cuidapp-theme-light .btn-emergency-call {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%) !important;
+  color: #ffffff !important;
+  border: 2px solid #fda4af !important;
+  box-shadow: 0 4px 18px rgba(225, 29, 72, 0.45) !important;
+  font-weight: 800 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.cuidapp-theme-light .btn-danger *,
+body.cuidapp-theme-light .btn-glass-danger *,
+body.cuidapp-theme-light #btnCaregiverEmergencySamu *,
+body.cuidapp-theme-light #btnEmergencySamu * {
+  color: #ffffff !important;
+}
+
+body.cuidapp-theme-light .btn-danger:hover,
+body.cuidapp-theme-light .btn-glass-danger:hover,
+body.cuidapp-theme-light #btnCaregiverEmergencySamu:hover,
+body.cuidapp-theme-light #btnEmergencySamu:hover {
+  background: linear-gradient(135deg, #be123c 0%, #9f1239 100%) !important;
+  box-shadow: 0 6px 24px rgba(225, 29, 72, 0.6) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 3. Badges de Alerta y Triage de Máxima Nitidez */
+body.cuidapp-theme-light .badge.bg-danger,
+body.cuidapp-theme-light .badge.bg-danger-subtle {
+  background: #ffe4e6 !important;
+  color: #9f1239 !important;
+  border: 1.5px solid #e11d48 !important;
+  font-weight: 800 !important;
+}
+
+body.cuidapp-theme-light .badge.bg-warning,
+body.cuidapp-theme-light .badge.bg-warning-subtle {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border: 1.5px solid #f59e0b !important;
+  font-weight: 800 !important;
+}
+
+body.cuidapp-theme-light .badge.bg-info,
+body.cuidapp-theme-light .badge.bg-info-subtle {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1.5px solid #0284c7 !important;
+  font-weight: 800 !important;
+}
+
+body.cuidapp-theme-light .badge.bg-success,
+body.cuidapp-theme-light .badge.bg-success-subtle {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+  border: 1.5px solid #059669 !important;
+  font-weight: 800 !important;
+}
+
+body.cuidapp-theme-light #triageBadge {
+  font-weight: 800 !important;
+  border-width: 1.5px !important;
+}
+
+/* Pestañas seleccionadas con degradado vibrante en Cian Neón (#00d2ff → #0072ff) */
+body.cuidapp-theme-light .btn-glass-primary.active,
+body.cuidapp-theme-light .btn-glass-primary:active,
+body.cuidapp-theme-light #tabBtnCaregiverDaily.active,
+body.cuidapp-theme-light #tabBtnCaregiverHistory.active,
+body.cuidapp-theme-light #tabBtnCaregiverDocs.active,
+body.cuidapp-theme-light #tabBtnCaregiverVaccinesDental.active,
+body.cuidapp-theme-light .nav-pills .nav-link.active {
+  background: linear-gradient(135deg, #00d2ff 0%, #0072ff 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #00d2ff !important;
+  box-shadow: 0 4px 16px rgba(0, 114, 255, 0.4) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.cuidapp-theme-light .btn-glass-primary.active *,
+body.cuidapp-theme-light #tabBtnCaregiverDaily.active *,
+body.cuidapp-theme-light #tabBtnCaregiverHistory.active *,
+body.cuidapp-theme-light #tabBtnCaregiverDocs.active *,
+body.cuidapp-theme-light #tabBtnCaregiverVaccinesDental.active * {
+  color: #ffffff !important;
+}
+
+/* Pestañas inactivas en Modo Día: limpias y contrastadas */
+body.cuidapp-theme-light #tabBtnCaregiverDaily:not(.active),
+body.cuidapp-theme-light #tabBtnCaregiverHistory:not(.active),
+body.cuidapp-theme-light #tabBtnCaregiverDocs:not(.active),
+body.cuidapp-theme-light #tabBtnCaregiverVaccinesDental:not(.active) {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  border: 1.5px solid #cbd5e1 !important;
+}
+
+body.cuidapp-theme-light #tabBtnCaregiverDaily:not(.active):hover,
+body.cuidapp-theme-light #tabBtnCaregiverHistory:not(.active):hover,
+body.cuidapp-theme-light #tabBtnCaregiverDocs:not(.active):hover,
+body.cuidapp-theme-light #tabBtnCaregiverVaccinesDental:not(.active):hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+  border-color: #94a3b8 !important;
+}
+
+/* Enlaces activos en menú lateral */
+body.cuidapp-theme-light .sidebar .nav-link.active {
+  background: linear-gradient(135deg, rgba(0, 210, 255, 0.2) 0%, rgba(0, 114, 255, 0.25) 100%) !important;
+  color: #0072ff !important;
+  border-left: 4px solid #00d2ff !important;
+  font-weight: 700 !important;
+  box-shadow: inset 0 0 10px rgba(0, 210, 255, 0.1) !important;
+}
+
+/* Botones para estados "Al Día" con degradado Verde Lima / Esmeralda Brillante (#10b981 → #00e676) */
+body.cuidapp-theme-light .btn-outline-success,
+body.cuidapp-theme-light .btn-success,
+body.cuidapp-theme-light .btn-toggle-vac:not(.btn-outline-secondary),
+body.cuidapp-theme-light .btn-toggle-ctrl:not(.btn-outline-secondary) {
+  background: linear-gradient(135deg, #10b981 0%, #00e676 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #00e676 !important;
+  box-shadow: 0 4px 14px rgba(0, 230, 118, 0.4) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+body.cuidapp-theme-light .btn-outline-success *,
+body.cuidapp-theme-light .btn-success *,
+body.cuidapp-theme-light .btn-toggle-vac:not(.btn-outline-secondary) *,
+body.cuidapp-theme-light .btn-toggle-ctrl:not(.btn-outline-secondary) * {
+  color: #ffffff !important;
+}
+
+body.cuidapp-theme-light .btn-outline-success:hover,
+body.cuidapp-theme-light .btn-success:hover,
+body.cuidapp-theme-light .btn-toggle-vac:not(.btn-outline-secondary):hover,
+body.cuidapp-theme-light .btn-toggle-ctrl:not(.btn-outline-secondary):hover {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  box-shadow: 0 6px 18px rgba(0, 230, 118, 0.5) !important;
+  transform: translateY(-1px);
+}
+
+/* Botón Asistente de Voz con degradado Naranja / Ámbar Intenso (#f59e0b → #ea580c) */
+body.cuidapp-theme-light #btnGlobalVoiceAssistant,
+body.cuidapp-theme-light .btn-voice-assistant {
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%) !important;
+  color: #ffffff !important;
+  border: 2px solid #fbbf24 !important;
+  box-shadow: 0 4px 16px rgba(234, 88, 12, 0.4) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+body.cuidapp-theme-light #btnGlobalVoiceAssistant *,
+body.cuidapp-theme-light .btn-voice-assistant * {
+  color: #ffffff !important;
+}
+
+body.cuidapp-theme-light #btnGlobalVoiceAssistant:hover,
+body.cuidapp-theme-light .btn-voice-assistant:hover {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
+  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.55) !important;
+  transform: translateY(-1px);
+}
+
+body.cuidapp-theme-light #btnGlobalVoiceAssistant.speaking,
+body.cuidapp-theme-light #btnGlobalVoiceAssistant.active {
+  background: linear-gradient(135deg, #ff2e93 0%, #f97316 100%) !important;
+  border-color: #ff2e93 !important;
+  box-shadow: 0 0 22px rgba(255, 46, 147, 0.7) !important;
+}
+
+/* Tabla de vacunas y controles en Modo Día */
+body.cuidapp-theme-light #caregiverVaccinesDentalContainer table.table-dark {
+  --bs-table-bg: transparent !important;
+  --bs-table-hover-bg: #f8fafc !important;
+  --bs-table-color: #0f172a !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+body.cuidapp-theme-light #caregiverVaccinesDentalContainer table.table-dark thead th {
+  color: #475569 !important;
+  border-bottom: 2px solid #cbd5e1 !important;
+}
+body.cuidapp-theme-light #caregiverVaccinesDentalContainer table.table-dark tbody td {
+  color: #0f172a !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+body.cuidapp-theme-light #caregiverVaccinesDentalContainer table.table-dark tbody tr:hover {
+  background-color: #f1f5f9 !important;
+}
+
+/* ==========================================================================
+   PRESERVAR TEXTO BLANCO SOLO DENTRO DE BOTONES SÓLIDOS OSCUROS, PRIMARIOS O ROJOS
+   ========================================================================== */
+body.cuidapp-theme-light .btn-danger,
+body.cuidapp-theme-light .btn-danger *,
+body.cuidapp-theme-light .btn-danger .text-white,
+body.cuidapp-theme-light .btn-primary,
+body.cuidapp-theme-light .btn-primary *,
+body.cuidapp-theme-light .btn-primary .text-white,
+body.cuidapp-theme-light .btn-dark,
+body.cuidapp-theme-light .btn-dark *,
+body.cuidapp-theme-light .btn-dark .text-white,
+body.cuidapp-theme-light .btn-glass-danger,
+body.cuidapp-theme-light .btn-glass-danger *,
+body.cuidapp-theme-light .btn-floating-senior-speech,
+body.cuidapp-theme-light .btn-floating-senior-speech *,
+body.cuidapp-theme-light #btnGlobalVoiceAssistant,
+body.cuidapp-theme-light #btnGlobalVoiceAssistant *,
+body.cuidapp-theme-light .badge.bg-danger,
+body.cuidapp-theme-light .badge.bg-danger *,
+body.cuidapp-theme-light .badge.bg-primary,
+body.cuidapp-theme-light .badge.bg-primary * {
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   CARPETAS EN TARJETAS COMPACTAS (VISTA CLÍNICA UNIFICADA)
+   ========================================================================== */
+.caregiver-folder-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px; /* grid-cols-2 gap-4 */
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+}
+@media (min-width: 992px) {
+  .caregiver-folder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columnas grandes en desktop */
+    gap: 16px;
+    height: 100%;
+    min-height: 480px;
+  }
+}
+
+.folder-tab-card {
+  background: #0f1926;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-radius: 26px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  min-height: 210px;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+.folder-tab-card:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+}
+.folder-tab-icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.folder-tab-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-width: 0;
+  width: 100%;
+}
+.folder-tab-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  margin-bottom: 5px;
+  letter-spacing: -0.3px;
+  white-space: normal;
+}
+.folder-tab-sub {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.35;
+  white-space: normal;
+  max-width: 90%;
+}
+
+/* Colores de bordes destacados para cada carpeta estilo Mateo */
+.folder-tab-card.tab-daily {
+  border-color: rgba(6, 182, 212, 0.45);
+}
+.folder-tab-card.tab-daily:hover,
+.folder-tab-card.tab-daily.active {
+  border: 2px solid #06b6d4 !important;
+  background: rgba(6, 182, 212, 0.12) !important;
+  box-shadow: 0 12px 28px rgba(6, 182, 212, 0.3) !important;
+}
+.folder-tab-card.tab-daily .folder-tab-title {
+  color: #38bdf8 !important;
+}
+
+.folder-tab-card.tab-history {
+  border-color: rgba(236, 72, 153, 0.45);
+}
+.folder-tab-card.tab-history:hover,
+.folder-tab-card.tab-history.active {
+  border: 2px solid #ec4899 !important;
+  background: rgba(236, 72, 153, 0.12) !important;
+  box-shadow: 0 12px 28px rgba(236, 72, 153, 0.3) !important;
+}
+.folder-tab-card.tab-history .folder-tab-title {
+  color: #f472b6 !important;
+}
+
+.folder-tab-card.tab-docs {
+  border-color: rgba(245, 158, 11, 0.45);
+}
+.folder-tab-card.tab-docs:hover,
+.folder-tab-card.tab-docs.active {
+  border: 2px solid #f59e0b !important;
+  background: rgba(245, 158, 11, 0.12) !important;
+  box-shadow: 0 12px 28px rgba(245, 158, 11, 0.3) !important;
+}
+.folder-tab-card.tab-docs .folder-tab-title {
+  color: #fbbf24 !important;
+}
+
+.folder-tab-card.tab-vaccines {
+  border-color: rgba(16, 185, 129, 0.45);
+}
+.folder-tab-card.tab-vaccines:hover,
+.folder-tab-card.tab-vaccines.active {
+  border: 2px solid #10b981 !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.3) !important;
+}
+.folder-tab-card.tab-vaccines .folder-tab-title {
+  color: #34d399 !important;
+}
+
+/* MODO CLARO (LIGHT MODE) */
+body.cuidapp-theme-light .folder-tab-card {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05) !important;
+}
+body.cuidapp-theme-light .folder-tab-card .folder-tab-title {
+  color: #0f172a !important;
+}
+body.cuidapp-theme-light .folder-tab-card .folder-tab-sub {
+  color: #64748b !important;
+}
+body.cuidapp-theme-light .folder-tab-card:hover {
+  background: #f8fafc !important;
+  border-color: #94a3b8 !important;
+}
+body.cuidapp-theme-light .folder-tab-card.tab-daily.active {
+  border: 2.5px solid #0284c7 !important;
+  background: #f0f9ff !important;
+  box-shadow: 0 0 14px rgba(2, 132, 199, 0.22) !important;
+}
+body.cuidapp-theme-light .folder-tab-card.tab-daily.active .folder-tab-title {
+  color: #0284c7 !important;
+}
+body.cuidapp-theme-light .folder-tab-card.tab-history.active {
+  border: 2.5px solid #e11d48 !important;
+  background: #fff1f2 !important;
+  box-shadow: 0 0 14px rgba(225, 29, 72, 0.22) !important;
+}
+body.cuidapp-theme-light .folder-tab-card.tab-history.active .folder-tab-title {
+  color: #be123c !important;
+}
+body.cuidapp-theme-light .folder-tab-card.tab-docs.active {
+  border: 2.5px solid #d97706 !important;
+  background: #fffbeb !important;
+  box-shadow: 0 0 14px rgba(217, 119, 6, 0.22) !important;
+}
+body.cuidapp-theme-light .folder-tab-card.tab-docs.active .folder-tab-title {
+  color: #b45309 !important;
+}
+body.cuidapp-theme-light .folder-tab-card.tab-vaccines.active {
+  border: 2.5px solid #059669 !important;
+  background: #ecfdf5 !important;
+  box-shadow: 0 0 14px rgba(5, 150, 105, 0.22) !important;
+}
+body.cuidapp-theme-light .folder-tab-card.tab-vaccines.active .folder-tab-title {
+  color: #047857 !important;
+}
+
+/* Banner Hero Único Estilo Mateo en Modo Claro */
+body.cuidapp-theme-light #cuidapp-global-topbar,
+body.cuidapp-theme-light #caregiverGreetingHeader {
+  background: #ffffff !important;
+  border: 2px solid #bae6fd !important;
+  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.08) !important;
+}
+body.cuidapp-theme-light #cuidapp-global-topbar h1,
+body.cuidapp-theme-light #cuidapp-global-topbar #caregiverGreetingPatientName,
+body.cuidapp-theme-light #caregiverGreetingHeader h2,
+body.cuidapp-theme-light #caregiverGreetingHeader #caregiverGreetingPatientName {
+  color: #1e3a8a !important;
+}
+body.cuidapp-theme-light #cuidapp-global-topbar p,
+body.cuidapp-theme-light #caregiverGreetingHeader small {
+  color: #475569 !important;
+}
+body.cuidapp-theme-light #cuidapp-global-topbar #lblGlobalPatient {
+  color: #0f172a !important;
+}
+body.cuidapp-theme-light #patientSelector {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+body.cuidapp-theme-light .hero-next-apt-card {
+  background: #f8fafc !important;
+  border: 1.5px solid #0284c7 !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.12) !important;
+}
+body.cuidapp-theme-light .hero-next-apt-card .text-white {
+  color: #0f172a !important;
+}
+body.cuidapp-theme-light .hero-next-apt-card .text-white-50 {
+  color: #64748b !important;
+}
+
+/* ==========================================================================
+   PANELES DE CARPETAS CONECTADOS VISUALMENTE & GRILLA DE SIGNOS VITALES
+   ========================================================================== */
+.folder-connected-panel {
+  position: relative;
+  border-radius: 18px;
+  animation: folderPanelSlide 0.22s ease-out;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+}
+@keyframes folderPanelSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.folder-panel-daily {
+  border-top: 3px solid #00e5ff;
+  padding-top: 8px;
+}
+.folder-panel-history {
+  border-top: 3px solid #f43f5e;
+  padding-top: 8px;
+}
+.folder-panel-docs {
+  border-top: 3px solid #f59e0b;
+  padding-top: 8px;
+}
+.folder-panel-vaccines {
+  border-top: 3px solid #00e676;
+  padding-top: 8px;
+}
+
+body.cuidapp-theme-light .folder-panel-daily {
+  border-top: 3px solid #0284c7;
+}
+body.cuidapp-theme-light .folder-panel-history {
+  border-top: 3px solid #e11d48;
+}
+body.cuidapp-theme-light .folder-panel-docs {
+  border-top: 3px solid #d97706;
+}
+body.cuidapp-theme-light .folder-panel-vaccines {
+  border-top: 3px solid #059669;
+}
+
+/* Barra Superior Destacada al Entrar a una Carpeta */
+.folder-view-topbar {
+  border-radius: 16px;
+  animation: folderPanelSlide 0.22s ease-out;
+}
+body.cuidapp-theme-light .folder-view-topbar {
+  background: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+body.cuidapp-theme-light .folder-view-topbar h4 {
+  color: #0f172a !important;
+}
+body.cuidapp-theme-light .folder-view-topbar small {
+  color: #475569 !important;
+}
+body.cuidapp-theme-light .folder-view-topbar .btn-back-to-folders {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+}
+body.cuidapp-theme-light .folder-view-topbar .btn-back-to-folders:hover {
+  background: #e2e8f0 !important;
+  border-color: #94a3b8 !important;
+}
+body.cuidapp-senior-mode .folder-view-topbar {
+  padding: 18px 22px !important;
+}
+body.cuidapp-senior-mode .folder-view-topbar h4 {
+  font-size: 1.5rem !important;
+}
+body.cuidapp-senior-mode .folder-view-topbar small {
+  font-size: 1rem !important;
+}
+body.cuidapp-senior-mode .folder-view-topbar .btn-back-to-folders {
+  font-size: 1.05rem !important;
+  padding: 10px 22px !important;
+}
+
+/* Grilla de Signos Vitales con Alturas Iguales y Botones Alineados */
+.vital-card-box {
+  min-height: 136px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+body.cuidapp-theme-light .vital-card-box {
+  background: #f8fafc !important;
+  border: 1.5px solid #e2e8f0 !important;
+}
+body.cuidapp-theme-light #cardSubmitReportContainer {
+  background: #ffffff !important;
+  border: 2px solid #bae6fd !important;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.08) !important;
+}
+body.cuidapp-senior-mode .vital-card-box {
+  min-height: 155px;
+}
+body.cuidapp-senior-mode .folder-tab-chevron {
+  font-size: 1.25rem !important;
+}
+
+/* ==========================================================================
+   VISUALIZACIÓN FÁCIL ESTILO MATEO PARA ADULTOS MAYORES (EDAD >= 60 AÑOS)
+   ========================================================================== */
+
+/* 1. Carpetas visuales grandes y claras (estilo tarjetas de Mateo en grid-cols-2 gap-4) */
+body.cuidapp-senior-mode .caregiver-folder-grid:not(.d-none) {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* Grilla 2 columnas */
+  gap: 16px !important; /* gap-4 */
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 480px !important;
+  margin-bottom: 24px !important;
+}
+
+@media (min-width: 992px) {
+  body.cuidapp-senior-mode .caregiver-folder-grid:not(.d-none) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* 2 columnas en desktop para accesibilidad */
+    gap: 16px !important;
+    height: 100% !important;
+    min-height: 480px !important;
+  }
+}
+
+body.cuidapp-senior-mode .caregiver-folder-grid.d-none {
+  display: none !important;
+}
+
+body.cuidapp-senior-mode .folder-tab-card {
+  min-height: 195px !important;
+  height: 100% !important;
+  padding: 20px 16px !important;
+  border-radius: 24px !important;
+  border: 2px solid rgba(255, 255, 255, 0.25) !important;
+  background: rgba(15, 23, 42, 0.92) !important;
+  gap: 10px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+body.cuidapp-senior-mode .folder-tab-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65) !important;
+}
+
+body.cuidapp-senior-mode .folder-tab-icon {
+  font-size: 3.2rem !important; /* Ícono protagonista proporcionado estilo Mateo */
+  line-height: 1 !important;
+  margin-bottom: 6px !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body.cuidapp-senior-mode .folder-tab-text {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  flex: 1 1 auto !important;
+  overflow: visible !important;
+}
+
+body.cuidapp-senior-mode .folder-tab-title {
+  font-size: 1.25rem !important; /* Letra grande y clara sin recortes */
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  white-space: normal !important;
+  line-height: 1.25 !important;
+  margin-bottom: 4px !important;
+  letter-spacing: -0.2px !important;
+}
+
+body.cuidapp-senior-mode .folder-tab-sub {
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  white-space: normal !important;
+  margin-top: 2px !important;
+  line-height: 1.3 !important;
+}
+
+/* Bordes de alto contraste destacados al seleccionar */
+body.cuidapp-senior-mode .folder-tab-card.tab-daily.active {
+  border: 3.5px solid #00e5ff !important;
+  background: rgba(0, 229, 255, 0.2) !important;
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.5) !important;
+}
+body.cuidapp-senior-mode .folder-tab-card.tab-daily.active .folder-tab-title {
+  color: #00e5ff !important;
+}
+
+body.cuidapp-senior-mode .folder-tab-card.tab-history.active {
+  border: 3.5px solid #f43f5e !important;
+  background: rgba(244, 63, 94, 0.2) !important;
+  box-shadow: 0 0 25px rgba(244, 63, 94, 0.5) !important;
+}
+body.cuidapp-senior-mode .folder-tab-card.tab-history.active .folder-tab-title {
+  color: #fb7185 !important;
+}
+
+body.cuidapp-senior-mode .folder-tab-card.tab-docs.active {
+  border: 3.5px solid #f59e0b !important;
+  background: rgba(245, 158, 11, 0.2) !important;
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.5) !important;
+}
+body.cuidapp-senior-mode .folder-tab-card.tab-docs.active .folder-tab-title {
+  color: #fbbf24 !important;
+}
+
+body.cuidapp-senior-mode .folder-tab-card.tab-vaccines.active {
+  border: 3.5px solid #00e676 !important;
+  background: rgba(0, 230, 118, 0.2) !important;
+  box-shadow: 0 0 25px rgba(0, 230, 118, 0.5) !important;
+}
+body.cuidapp-senior-mode .folder-tab-card.tab-vaccines.active .folder-tab-title {
+  color: #00e676 !important;
+}
+
+/* Adaptación de carpetas grandes en Modo Claro */
+body.cuidapp-theme-light.cuidapp-senior-mode .folder-tab-card {
+  background: #ffffff !important;
+  border: 2.5px solid #94a3b8 !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08) !important;
+}
+body.cuidapp-theme-light.cuidapp-senior-mode .folder-tab-card .folder-tab-title {
+  color: #0f172a !important;
+}
+body.cuidapp-theme-light.cuidapp-senior-mode .folder-tab-card .folder-tab-sub {
+  color: #334155 !important;
+}
+body.cuidapp-theme-light.cuidapp-senior-mode .folder-tab-card.tab-daily.active {
+  border: 3.5px solid #0284c7 !important;
+  background: #f0f9ff !important;
+  box-shadow: 0 0 20px rgba(2, 132, 199, 0.3) !important;
+}
+body.cuidapp-theme-light.cuidapp-senior-mode .folder-tab-card.tab-daily.active .folder-tab-title {
+  color: #0284c7 !important;
+}
+body.cuidapp-theme-light.cuidapp-senior-mode .folder-tab-card.tab-history.active {
+  border: 3.5px solid #e11d48 !important;
+  background: #fff1f2 !important;
+  box-shadow: 0 0 20px rgba(225, 29, 72, 0.3) !important;
+}
+body.cuidapp-theme-light.cuidapp-senior-mode .folder-tab-card.tab-history.active .folder-tab-title {
+  color: #e11d48 !important;
+}
+body.cuidapp-theme-light.cuidapp-senior-mode .folder-tab-card.tab-docs.active {
+  border: 3.5px solid #d97706 !important;
+  background: #fffbeb !important;
+  box-shadow: 0 0 20px rgba(217, 119, 6, 0.3) !important;
+}
+body.cuidapp-theme-light.cuidapp-senior-mode .folder-tab-card.tab-docs.active .folder-tab-title {
+  color: #d97706 !important;
+}
+body.cuidapp-theme-light.cuidapp-senior-mode .folder-tab-card.tab-vaccines.active {
+  border: 3.5px solid #059669 !important;
+  background: #ecfdf5 !important;
+  box-shadow: 0 0 20px rgba(5, 150, 105, 0.3) !important;
+}
+body.cuidapp-theme-light.cuidapp-senior-mode .folder-tab-card.tab-vaccines.active .folder-tab-title {
+  color: #059669 !important;
+}
+
+/* 2. Tarjetas de Signos Vitales y Medicamentos ampliadas */
+body.cuidapp-senior-mode #cardBasicVitals {
+  padding: 24px 26px !important;
+  border-radius: 22px !important;
+}
+body.cuidapp-senior-mode #cardBasicVitals .row.g-3 {
+  --bs-gutter-y: 1.5rem !important; /* Mayor espaciado entre bloques */
+  --bs-gutter-x: 1.5rem !important;
+}
+body.cuidapp-senior-mode #cardBasicVitals .col-md-6 > div.p-3 {
+  padding: 22px 24px !important;
+  border-radius: 18px !important;
+  border: 2px solid rgba(255, 255, 255, 0.22) !important;
+  background: rgba(15, 23, 42, 0.78) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
+}
+body.cuidapp-senior-mode #cardBasicVitals .glass-label {
+  font-size: 1.22rem !important; /* text-xl */
+  font-weight: 800 !important;
+  letter-spacing: 0.2px !important;
+  margin-bottom: 10px !important;
+}
+body.cuidapp-senior-mode #cardBasicVitals span.badge[id^="refBadge"] {
+  font-size: 0.92rem !important;
+  padding: 6px 14px !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+}
+
+/* Limpieza visual: sin etiquetas técnicas pequeñas que saturen la vista */
+body.cuidapp-senior-mode #badgeCaregiverTriageMode,
+body.cuidapp-senior-mode #vitalsSubTitleCaregiver,
+body.cuidapp-senior-mode #pediatricCaregiverVitalsBanner,
+body.cuidapp-senior-mode #cardBasicVitals .col-md-6 > div > span.text-white-50.small.d-block.mb-1 {
+  display: none !important;
+}
+body.cuidapp-senior-mode #cardBasicVitals .row.g-2 span.text-white-50.small {
+  display: block !important;
+  font-size: 1.05rem !important; /* Claramente legible */
+  font-weight: 700 !important;
+  color: #7dd3fc !important;
+  margin-bottom: 6px !important;
+}
+
+/* Tarjeta de Medicamentos ampliada */
+body.cuidapp-senior-mode #cardWellness {
+  padding: 24px 26px !important;
+  border-radius: 22px !important;
+}
+body.cuidapp-senior-mode #cardWellness .form-check.form-switch {
+  padding: 18px 24px !important;
+  border-radius: 18px !important;
+  border: 2.5px solid #10b981 !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+  margin-bottom: 20px !important;
+}
+body.cuidapp-senior-mode #transversalMedication {
+  width: 3.5em !important;
+  height: 1.85em !important;
+  cursor: pointer !important;
+}
+body.cuidapp-senior-mode label[for="transversalMedication"] {
+  font-size: 1.25rem !important; /* text-xl */
+  font-weight: 800 !important;
+  color: #ffffff !important;
+}
+body.cuidapp-senior-mode #caregiverPrescriptionListPreview .p-3 {
+  padding: 20px 24px !important;
+  border-radius: 18px !important;
+  border: 2px solid rgba(255, 255, 255, 0.22) !important;
+  background: rgba(15, 23, 42, 0.8) !important;
+  margin-bottom: 14px !important;
+}
+body.cuidapp-senior-mode #caregiverPrescriptionListPreview strong {
+  font-size: 1.28rem !important; /* text-xl */
+  font-weight: 800 !important;
+  color: #ffffff !important;
+}
+body.cuidapp-senior-mode #caregiverPrescriptionListPreview .badge {
+  font-size: 1.02rem !important;
+  padding: 6px 14px !important;
+  font-weight: 700 !important;
+}
+body.cuidapp-senior-mode #caregiverPrescriptionListPreview .btn {
+  min-height: 48px !important;
+  font-size: 1.05rem !important;
+  padding: 8px 18px !important;
+  border-radius: 12px !important;
+}
+
+/* 3. Emergencia y Voz protagonistas */
+body.cuidapp-senior-mode #btnGlobalVoiceAssistant {
+  min-height: 50px !important;
+  padding: 10px 20px !important;
+  font-size: 1.12rem !important;
+  font-weight: 800 !important;
+  border-radius: 14px !important;
+  border: 2px solid #fef08a !important;
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%) !important;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45) !important;
+}
+body.cuidapp-senior-mode #globalVoiceIcon {
+  font-size: 1.45rem !important;
+}
+body.cuidapp-senior-mode #globalVoiceText {
+  font-size: 1.08rem !important;
+  font-weight: 800 !important;
+}
+
+body.cuidapp-senior-mode #caregiverEmergencyButtonsContainer {
+  gap: 12px !important;
+  margin-top: 14px !important;
+  padding-top: 14px !important;
+}
+body.cuidapp-senior-mode #btnCallEmergencyContactDirect {
+  min-height: 56px !important;
+  padding: 14px 20px !important;
+  font-size: 1.15rem !important; /* text-xl */
+  font-weight: 800 !important;
+  border-radius: 16px !important;
+  border: 2.5px solid #38bdf8 !important;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4) !important;
+}
+body.cuidapp-senior-mode #btnCallEmergencyContactDirect .emoji-senior {
+  font-size: 1.6rem !important;
+}
+body.cuidapp-senior-mode #btnCallSamu131 {
+  min-height: 56px !important;
+  padding: 14px 20px !important;
+  font-size: 1.15rem !important; /* text-xl */
+  font-weight: 800 !important;
+  border-radius: 16px !important;
+  border: 2.5px solid #ef4444 !important;
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5) !important;
+}
+body.cuidapp-senior-mode #btnCallSamu131 .emoji-senior {
+  font-size: 1.6rem !important;
+}
+body.cuidapp-senior-mode #btnOpenCaregiverEmergencyQrModal {
+  min-height: 52px !important;
+  padding: 12px 20px !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  border-radius: 16px !important;
+  border: 2px solid #38bdf8 !important;
+  background: rgba(14, 165, 233, 0.2) !important;
+  color: #38bdf8 !important;
+}
+body.cuidapp-senior-mode #btnOpenCaregiverEmergencyQrModal i {
+  font-size: 1.35rem !important;
+}
+
+/* ==========================================================================
+   AJUSTE DE CONTROLES NUMÉRICOS (STEPPERS - / VALOR / +) EN SIGNOS VITALES
+   ========================================================================== */
+.vital-card-box,
+#cardPrenatalVitalsOnly,
+#cardPrenatalVitalsOnly .p-3,
+#cardBasicVitals,
+#cardBasicVitals .p-3,
+.vital-calc-card {
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.vital-card-box *,
+#cardPrenatalVitalsOnly *,
+#cardBasicVitals * {
+  box-sizing: border-box !important;
+}
+
+/* Contenedores de steppers flexibles sin desborde */
+.vital-card-box .input-group,
+#cardPrenatalVitalsOnly .input-group,
+#cardBasicVitals .input-group,
+.vital-stepper-group {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Botones de disminución e incremento adaptativos */
+.vital-card-box .input-btn,
+#cardPrenatalVitalsOnly .input-btn,
+#cardBasicVitals .input-btn,
+.decrease-btn,
+.increase-btn {
+  box-sizing: border-box !important;
+  width: 30px !important;
+  min-width: 30px !important;
+  max-width: 30px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.05rem !important;
+  flex: 0 0 30px !important;
+  height: 38px !important;
+  line-height: 1 !important;
+}
+
+/* Campos de entrada numéricos adaptativos */
+.vital-card-box input.input-field,
+#cardPrenatalVitalsOnly input.input-field,
+#cardBasicVitals input.input-field,
+#cardPrenatalVitalsOnly #bpSystolicPrenatal,
+#cardPrenatalVitalsOnly #bpDiastolicPrenatal,
+#cardBasicVitals #bpSystolic,
+#cardBasicVitals #bpDiastolic,
+input.vital-calc-input {
+  box-sizing: border-box !important;
+  min-width: 36px !important;
+  max-width: calc(100% - 60px) !important;
+  padding: 2px 4px !important;
+  font-size: 1.05rem !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  text-align: center !important;
+  flex: 1 1 auto !important;
+}
+
+/* Modo Senior con proporciones seguras */
+body.cuidapp-senior-mode .vital-card-box .input-btn,
+body.cuidapp-senior-mode #cardBasicVitals .input-btn {
+  width: 32px !important;
+  min-width: 32px !important;
+  flex: 0 0 32px !important;
+  font-size: 1.15rem !important;
+}
+
+body.cuidapp-senior-mode .vital-card-box input.input-field,
+body.cuidapp-senior-mode #cardBasicVitals input.input-field {
+  min-width: 40px !important;
+  max-width: calc(100% - 64px) !important;
+  font-size: 1.15rem !important;
+}
+
+/* ==========================================================================
+   AJUSTES VISUALES PUNTUALES
+   ========================================================================== */
+
+/* Monitor Electrocardiográfico Multiparámetro < 900px */
+@media (max-width: 900px) {
+  .hospital-monitor-container .row.g-0 > div[class*="col-"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+  .hospital-monitor-container .border-start {
+    border-left: none !important;
+    border-top: 1px solid #12202e !important;
+  }
+}
+
+/* En resoluciones medianas y móviles, garantizar que no se monten los controles */
+@media (max-width: 991px) {
+  #cardPrenatalVitalsOnly .row.g-2 > [class*="col-"],
+  #cardBasicVitals .row.g-2 > [class*="col-"] {
+    width: 100% !important;
+    margin-bottom: 6px !important;
+  }
+}
+
+/* Botones de Síntomas y Edema de Alerta con flex-wrap sin superposición */
+#cardioSymptomsContainer {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  align-items: center !important;
+}
+
+#cardioSymptomsContainer .cardio-symptom-btn {
+  width: auto !important;
+  min-width: fit-content !important;
+  max-width: none !important;
+  white-space: nowrap !important;
+  position: static !important;
+}
+
+/* Banner Tomas Básicas en Rango Normal sin recortes */
+#vitalsRealtimeAlertBox,
+#cardBasicVitals #vitalsRealtimeAlertBox {
+  max-height: none !important;
+  overflow: visible !important;
+  height: auto !important;
+}
+
+
+
+
+
+
+
+
+
+
+
